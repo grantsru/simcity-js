@@ -1,6 +1,6 @@
 import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
-
+import Board from "./containers/Board";
 import { context, reducer, CLICK } from "./store";
 
 function SimCity(): React.FC {
@@ -12,7 +12,7 @@ function SimCity(): React.FC {
 
   return (
     <context.Provider value={{ state, dispatch }}>
-      <button onClick={clickElement} />
+      <Board />
     </context.Provider>
   );
 }
