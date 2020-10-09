@@ -7,7 +7,6 @@ function SimCity(): React.FC {
   const [state, dispatch] = useReducer(reducer, useContext(context));
 
   const clickElement = (): void => {
-    console.log('Test.');
     dispatch({ type: CLICK });
   }
 
