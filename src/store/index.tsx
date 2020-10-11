@@ -1,13 +1,13 @@
 import { createContext } from 'react';
-import Tile from "../models/Tile";
+import Tile, { tileTypes } from "../models/Tile";
 
 const grassMap: Tile[][] = [...Array(10)]
     .map((_, x) => [...Array(10)]
-        .map((_, y) => new Tile(null, x, y)));
+        .map((_, y) => new Tile(tileTypes[0], x, y)));
 
 export const initialState = {
   boardMap: grassMap,
-  activeTool: 'road',
+  activeTool: 'grass',
 };
 
 export const HYDRATE = 'HYDRATE';
@@ -20,7 +20,6 @@ export const Reducer = (state, action) => {
         ...state,
       }
     case SELECT_TOOL:
-      console.log(action);
       return {
         ...state,
         activeTool: action.payload,

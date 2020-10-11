@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import {Context, HYDRATE} from "../store";
 
-import Tile, {tileIcons} from "../models/Tile";
-import { TileType } from "../models/Tile";
+import Tile from "../models/Tile";
+import { tileTypes } from "../models/Tile";
 
 interface CellProps {
   key: string;
@@ -23,11 +23,11 @@ export default function Cell(props: CellProps) {
   const [state, dispatch] = useContext(Context);
 
   const clickCell = (): void => {
-    props.tile.setTileType(TileType[state.activeTool]);
+    props.tile.setTileType(state.activeTool);
     dispatch({ type: HYDRATE });
   };
 
   return <StyledCell onClick={clickCell} {...props}>
-    {tileIcons[props.tile.type]}
+    {props.tile.type.icon}
   </StyledCell>;
 }

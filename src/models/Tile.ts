@@ -1,43 +1,58 @@
-export enum TileType {
-    'grass',
-    'water',
-    'road',
-    'residential',
-    'industrial',
-    'commercial'
+export interface TileType {
+    value: string;
+    icon: string;
+    cost: number;
 }
 
-export const tileIcons = ['🥦', '🌊', '🚦', '🏠', '🏭', '🏢'];
+export const tileTypes: TileType[] = [
+    { value: 'grass', icon: '🌲', cost: 50 },
+    { value: 'water', icon: '🌊', cost: 50 },
+    { value: 'road', icon: '🚦', cost: 50 },
+    { value: 'residential', icon: '🏠', cost: 50 },
+    { value: 'industrial', icon: '🏭', cost: 50 },
+    { value: 'commercial', icon: '🏢', cost: 50 },
+    { value: 'reactor', icon: '☢️', cost: 50 },
+    { value: 'power', icon: '⚡', cost: 50 },
+];
 
 export default class Tile {
-    type: TileType;
     x: number;
     y: number;
+    type: TileType;
+    powered: boolean;
 
-    constructor(type = null, private readonly x, private readonly y) {
-        this.type = type || TileType.grass;
+    constructor(type, private readonly x, private readonly y) {
+        this.type = type;
+        this.powered = false;
     }
 
     cellBackground(): string {
-        switch (this.type) {
-            case TileType.grass:
+        switch (this.type.value) {
+            case 'grass':
                 return 'yellowgreen';
-            case TileType.water:
+            case 'water':
                 return 'dodgerblue';
-            case TileType.road:
-                return '#383838';
-            case TileType.residential:
+            case 'road':
+                return 'dimgray';
+            case 'residential':
                 return 'green';
-            case TileType.industrial:
+            case 'industrial':
                 return 'yellow';
-            case TileType.commercial:
+            case 'commercial':
                 return 'blue';
+            case 'reactor':
+                return 'red';
             default:
                 return 'white';
         }
     }
 
-    setTileType(value) {
-        this.type = value;
+    setTileType(value: string) {
+        for (const type of tileTypes) {
+            if (type.value === value) {
+                this.type = type;
+                break;
+            }
+        }
     }
 }

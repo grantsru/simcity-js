@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import {Context, SELECT_TOOL} from "../store";
 
-import { TileType, tileIcons } from "../models/Tile";
+import { tileTypes } from "../models/Tile";
 
 const StyledToolbar = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  margin-bottom: 5px;
 `;
 
 const StyledToolTile = styled.div`
@@ -15,30 +16,27 @@ const StyledToolTile = styled.div`
   width: 50px;
   font-size: 32px;
   text-align: center;
+  border: ${({isActive}) => isActive ? '5px solid red' : '5px solid white'};
 `;
 
 export default function Toolbar() {
     const [state, dispatch] = useContext(Context);
 
-    const toolList = [...Array(Object.keys(TileType).length / 2)].map((_, i) => ({
-        value: TileType[i],
-        icon: tileIcons[i],
-        select() {
-            dispatch({
-                type: SELECT_TOOL,
-                payload: TileType[i],
-            })
-        }
-    }));
+    const selectTool = (i) => {
+        dispatch({
+            type: SELECT_TOOL,
+            payload: tileTypes[i].value,
+        })
+    }
 
     return (
         <StyledToolbar>
             {
-                toolList.map((tool, i) =>
+                tileTypes.map((tool, i) =>
                     <StyledToolTile
                         key={tool.value}
                         isActive={tool.value === state.activeTool}
-                        onClick={tool.select}
+                        onClick={() => selectTool(i)}
                     >
                         {tool.icon}
                     </StyledToolTile>
