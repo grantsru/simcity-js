@@ -7,7 +7,7 @@ export enum TileType {
     'commercial'
 }
 
-export const tileIcons = ['🥦', '🌊', '⬛', '🏠', '🏭', '🏢'];
+export const tileIcons = ['🥦', '🌊', '🚦', '🏠', '🏭', '🏢'];
 
 export default class Tile {
     type: TileType;
@@ -21,11 +21,17 @@ export default class Tile {
     cellBackground(): string {
         switch (this.type) {
             case TileType.grass:
-                return 'green';
+                return 'yellowgreen';
             case TileType.water:
-                return 'blue';
+                return 'dodgerblue';
             case TileType.road:
                 return '#383838';
+            case TileType.residential:
+                return 'green';
+            case TileType.industrial:
+                return 'yellow';
+            case TileType.commercial:
+                return 'blue';
             default:
                 return 'white';
         }

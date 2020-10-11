@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import {Context, HYDRATE} from "../store";
 
-import Tile from "../models/Tile";
+import Tile, {tileIcons} from "../models/Tile";
 import { TileType } from "../models/Tile";
 
 interface CellProps {
@@ -14,6 +14,8 @@ interface CellProps {
 const StyledCell = styled.div`
   height: 50px;
   width: 50px;
+  font-size: 34px;
+  text-align: center;
   background: ${(props: CellProps) => props.tile.cellBackground()};
 `;
 
@@ -25,5 +27,7 @@ export default function Cell(props: CellProps) {
     dispatch({ type: HYDRATE });
   };
 
-  return <StyledCell onClick={clickCell} {...props} />;
+  return <StyledCell onClick={clickCell} {...props}>
+    {tileIcons[props.tile.type]}
+  </StyledCell>;
 }
