@@ -1,6 +1,44 @@
 import React from 'react';
 import Grid from "../components/Grid";
 
+const grassMap = [
+  [
+    { type: 'grass' },
+    { type: 'grass' },
+    { type: 'water' },
+    { type: 'water' },
+    { type: 'grass' },
+  ],
+  [
+    { type: 'grass' },
+    { type: 'water' },
+    { type: 'water' },
+    { type: 'water' },
+    { type: 'grass' },
+  ],
+  [
+    { type: 'grass' },
+    { type: 'water' },
+    { type: 'water' },
+    { type: 'water' },
+    { type: 'grass' },
+  ],
+  [
+    { type: 'grass' },
+    { type: 'water' },
+    { type: 'water' },
+    { type: 'water' },
+    { type: 'grass' },
+  ],
+  [
+    { type: 'grass' },
+    { type: 'grass' },
+    { type: 'grass' },
+    { type: 'grass' },
+    { type: 'grass' },
+  ],
+];
+
 export default function Board() {
-  return <Grid height={10} width={10} />
+  return <Grid gridMap={grassMap} />
 }

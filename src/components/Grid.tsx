@@ -1,41 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Cell from './Cell';
+
 interface GridProps {
-  height: number;
-  width: number;
+  gridMap: any[];
 }
 
-const StyledGrid = styled.table`
-  border: 2px solid #CCC;
+const StyledGrid = styled.div`
+  background: white;
 `;
 
-const StyledRow = styled.tr`
-  border: 1px solid #CCC;
-`;
-
-const StyledCell = styled.td`
-  border: 1px solid #CCC;
+const StyledRow = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 `;
 
 export default function Grid(props: GridProps) {
-  const { height, width } = props;
+  const { gridMap } = props;
 
   return (
     <StyledGrid>
-      <tbody>
-        {
-          [...Array(height).keys()].map(i =>
-            <StyledRow key={`row-${i}`}>
-              {
-                [...Array(width).keys()].map(j =>
-                  <StyledCell key={`cell-${j}`}>Test</StyledCell>
-                )
-              }
-            </StyledRow>
-          )
-        }
-      </tbody>
+      {
+        gridMap.map((gridRow, i) =>
+          <StyledRow key={`row-${i}`}>
+            {
+              gridRow.map((gridCell, j) =>
+                <Cell key={`cell-${j}`} x={i} y={j} type={gridCell.type} />
+              )
+            }
+          </StyledRow>
+        )
+      }
     </StyledGrid>
   )
 }
