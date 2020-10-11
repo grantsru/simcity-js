@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { TileType } from "../models/Tile";
+
 interface CellProps {
   x: number;
   y: number;
@@ -10,9 +12,9 @@ interface CellProps {
 
 const cellBackground = (props: CellProps): string => {
   switch (props.type) {
-    case 'grass':
+    case TileType.grass:
       return 'green';
-    case 'water':
+    case TileType.water:
       return 'blue';
     default:
       return 'white';
@@ -27,7 +29,6 @@ const StyledCell = styled.div`
 
 export default function Cell(props: CellProps) {
   const clickCell = (): void => {
-    console.log(props.x, props.y, props.type);
   }
 
   return <StyledCell onClick={clickCell} {...props} />;

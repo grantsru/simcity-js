@@ -1,43 +1,10 @@
-import React from 'react';
+import React from "react";
 import Grid from "../components/Grid";
+import Tile from "../models/Tile";
 
-const grassMap = [
-  [
-    { type: 'grass' },
-    { type: 'grass' },
-    { type: 'water' },
-    { type: 'water' },
-    { type: 'grass' },
-  ],
-  [
-    { type: 'grass' },
-    { type: 'water' },
-    { type: 'water' },
-    { type: 'water' },
-    { type: 'grass' },
-  ],
-  [
-    { type: 'grass' },
-    { type: 'water' },
-    { type: 'water' },
-    { type: 'water' },
-    { type: 'grass' },
-  ],
-  [
-    { type: 'grass' },
-    { type: 'water' },
-    { type: 'water' },
-    { type: 'water' },
-    { type: 'grass' },
-  ],
-  [
-    { type: 'grass' },
-    { type: 'grass' },
-    { type: 'grass' },
-    { type: 'grass' },
-    { type: 'grass' },
-  ],
-];
+const grassMap: Tile[][] = [...Array(50)]
+  .map(() => [...Array(50)]
+    .map(() => new Tile()));
 
 export default function Board() {
   return <Grid gridMap={grassMap} />

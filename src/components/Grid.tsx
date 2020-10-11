@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Cell from './Cell';
+import Tile from '../models/Tile';
 
 interface GridProps {
-  gridMap: any[];
+  gridMap: Tile[][];
 }
 
 const StyledGrid = styled.div`
