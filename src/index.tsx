@@ -1,19 +1,15 @@
 import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import Board from "./containers/Board";
-import { context, reducer, CLICK } from "./store";
+import {Context, Reducer} from "./store";
 
 function SimCity(): React.FC {
-  const [state, dispatch] = useReducer(reducer, useContext(context));
-
-  const clickElement = (): void => {
-    dispatch({ type: CLICK });
-  }
+  const [state, dispatch] = useReducer(Reducer, useContext(Context));
 
   return (
-    <context.Provider value={{ state, dispatch }}>
+    <Context.Provider value={[state, dispatch]}>
       <Board />
-    </context.Provider>
+    </Context.Provider>
   );
 }
 

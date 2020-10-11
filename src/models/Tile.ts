@@ -1,5 +1,6 @@
 export enum TileType {
     'grass',
+    'road',
     'water',
     'residential',
     'industrial',
@@ -8,8 +9,14 @@ export enum TileType {
 
 export default class Tile {
     type: TileType;
+    x: number;
+    y: number;
 
-    constructor(type = null) {
+    constructor(type = null, private readonly x, private readonly y) {
         this.type = type || TileType.grass;
+    }
+
+    setTileType(value) {
+        this.type = value;
     }
 }

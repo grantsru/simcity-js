@@ -1,11 +1,16 @@
-import React from "react";
-import Grid from "../components/Grid";
-import Tile from "../models/Tile";
+import React, { useContext } from "react";
+import { Context } from "../store";
 
-const grassMap: Tile[][] = [...Array(50)]
-  .map(() => [...Array(50)]
-    .map(() => new Tile()));
+import Grid from "../components/Grid";
+import Toolbar from "./Toolbar";
 
 export default function Board() {
-  return <Grid gridMap={grassMap} />
+  const [state] = useContext(Context);
+
+  return (
+    <>
+      <Toolbar />
+      <Grid gridMap={state.boardMap} />
+    </>
+  )
 }
