@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import {Context, SELECT_TOOL} from "../store";
 
-import { TileType } from "../models/Tile";
+import { TileType, tileIcons } from "../models/Tile";
 
 const StyledToolbar = styled.div`
   display: flex;
@@ -10,21 +10,37 @@ const StyledToolbar = styled.div`
   justify-content: center;
 `;
 
-export default function Toolbar() {
-    const [, dispatch] = useContext(Context);
+const StyledToolTile = styled.div`
+  height: 50px;
+  width: 50px;
+  font-size: 32px;
+`;
 
-    const selectTool = (e) => {
-        dispatch({
-            type: SELECT_TOOL,
-            payload: e.target.innerText,
-        })
-    }
+export default function Toolbar() {
+    const [state, dispatch] = useContext(Context);
+
+    const toolList = [...Array(Object.keys(TileType).length / 2)].map((_, i) => ({
+        value: TileType[i],
+        icon: tileIcons[i],
+        select() {
+            dispatch({
+                type: SELECT_TOOL,
+                payload: TileType[i],
+            })
+        }
+    }));
 
     return (
         <StyledToolbar>
             {
-                [...Array(Object.keys(TileType).length / 2)].map((_, i) =>
-                    <div key={TileType[i]} onClick={selectTool}>{TileType[i]}</div>
+                toolList.map((tool, i) =>
+                    <StyledToolTile
+                        key={tool.value}
+                        isActive={tool.value === state.activeTool}
+                        onClick={tool.select}
+                    >
+                        {tool.icon}
+                    </StyledToolTile>
                 )
             }
         </StyledToolbar>

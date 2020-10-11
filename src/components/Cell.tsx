@@ -11,23 +11,10 @@ interface CellProps {
   tile: Tile;
 }
 
-const cellBackground = (props: CellProps): string => {
-  switch (props.tile.type) {
-    case TileType.grass:
-      return 'green';
-    case TileType.water:
-      return 'blue';
-    case TileType.road:
-      return 'darkslategray';
-    default:
-      return 'white';
-  }
-}
-
 const StyledCell = styled.div`
   height: 50px;
   width: 50px;
-  background: ${cellBackground};
+  background: ${(props: CellProps) => props.tile.cellBackground()};
 `;
 
 export default function Cell(props: CellProps) {
