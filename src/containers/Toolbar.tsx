@@ -14,6 +14,7 @@ const StyledToolTile = styled.div`
   height: 50px;
   width: 50px;
   font-size: 32px;
+  text-align: center;
 `;
 
 export default function Toolbar() {
