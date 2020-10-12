@@ -1,8 +1,11 @@
 import { createContext } from 'react';
 import Tile, { tileTypes } from "../models/Tile";
 
-const grassMap: Tile[][] = [...Array(11)]
-    .map((_, x) => [...Array(11)]
+const mapHeight = 41;
+const mapWidth = 41;
+
+const grassMap: Tile[][] = [...Array(mapHeight)]
+    .map((_, x) => [...Array(mapWidth)]
         .map((_, y) => new Tile(tileTypes[0], x, y)));
 
 export const initialState = {

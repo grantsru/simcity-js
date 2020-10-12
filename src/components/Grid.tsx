@@ -9,12 +9,13 @@ interface GridProps {
 }
 
 const StyledGrid = styled.div`
+  padding: 70px 0 0 40px;
   background: white;
 `;
 
 const StyledRow = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row;
   justify-content: center;
 `;
 

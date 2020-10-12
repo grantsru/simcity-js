@@ -50,9 +50,9 @@ export default class Tile {
     }
 
     isBuilding() {
-        return this.type.value !== 'grass'
-            && this.type.value !== 'water'
-            && this.type.value !== 'reactor';
+        return this.type.value === 'residential'
+            || this.type.value === 'industrial'
+            || this.type.value === 'commercial';
     }
 
     setTileType(value: string) {
