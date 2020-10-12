@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import {Context, HYDRATE} from "../store";
-import Tile from "../models/Tile";
+import { Context, HYDRATE } from '../store';
+import Tile from '../models/Tile';
 
 interface CellProps {
   key: string;
@@ -12,7 +12,7 @@ interface CellProps {
 const StyledTopSpan = styled.span`
   border: 1px solid ${(props: CellProps) => props.tile.cellBackground()};
   &:hover { border: 1px solid yellow };
-  ${(props: CellProps) => props.tile.isBuilding() &&  props.tile.electricity.power && `
+  ${(props: CellProps) => props.tile.isBuilding() && props.tile.electricity.power && `
     &:after {
       content: "⚡";
       font-size: 10px;
@@ -54,15 +54,17 @@ const StyledCell = styled.div`
   width: 50px;
   font-size: 34px;
   text-align: center;
+  cursor: pointer;
   background: ${(props: CellProps) => props.tile.cellBackground()};
 `;
 
 export default function Cell(props: CellProps) {
+  const { tile } = props;
   const [state, dispatch] = useContext(Context);
 
   const clickCell = (): void => {
-    if (state.activeTool === 'power') props.tile.electricity.wired = true;
-    else props.tile.setTileType(state.activeTool);
+    if (state.activeTool === 'power') tile.electricity.wired = true;
+    else tile.setTileType(state.activeTool);
 
     dispatch({ type: HYDRATE });
   };
@@ -71,7 +73,7 @@ export default function Cell(props: CellProps) {
     <StyledTopSpan onClick={clickCell} {...props}>
       <StyledBottomSpan {...props}>
         <StyledCell {...props}>
-          {props.tile.type.icon}
+          {tile.type.icon}
         </StyledCell>
       </StyledBottomSpan>
     </StyledTopSpan>

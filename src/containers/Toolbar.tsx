@@ -1,23 +1,23 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import {Context, SELECT_TOOL} from "../store";
+import { Context, SELECT_TOOL } from '../store';
 
-import { tileTypes } from "../models/Tile";
+import { tileTypes } from '../models/Tile';
 
 const actionTypes = [
-    {
-        action: 'play',
-        icon: '🟢',
-    },
-    {
-        action: 'pause',
-        icon: '🔴',
-    },
-    {
-        action: 'save',
-        icon: '💾',
-    }
-]
+  {
+    action: 'play',
+    icon: '🟢',
+  },
+  {
+    action: 'pause',
+    icon: '🔴',
+  },
+  {
+    action: 'save',
+    icon: '💾',
+  },
+];
 
 const StyledToolbar = styled.div`
   position: fixed;
@@ -41,46 +41,45 @@ const StyledToolTile = styled.div`
   width: 50px;
   font-size: 32px;
   text-align: center;
-  border: ${({isActive}) => isActive ? '5px solid red' : '5px solid white'};
+  cursor: pointer;
+  border: ${({ isActive }) => (isActive ? '5px solid red' : '5px solid white')};
 `;
 
 export default function Toolbar() {
-    const [state, dispatch] = useContext(Context);
+  const [state, dispatch] = useContext(Context);
 
-    const selectTool = (i) => {
-        dispatch({
-            type: SELECT_TOOL,
-            payload: tileTypes[i].value,
-        })
-    }
+  const selectTool = (i) => {
+    dispatch({
+      type: SELECT_TOOL,
+      payload: tileTypes[i].value,
+    });
+  };
 
-    return (
-        <StyledToolbar>
-            <StyledToolSection>
-                {
-                    actionTypes.map((action) =>
-                        <StyledToolTile
-                        >
-                            {action.icon}
-                        </StyledToolTile>
-                    )
-                }
-            </StyledToolSection>
-            <StyledToolSection>
-                {
-                    tileTypes.map((tool, i) =>
-                        <StyledToolTile
-                            key={tool.value}
-                            isActive={tool.value === state.activeTool}
-                            onClick={() => selectTool(i)}
-                        >
-                            {tool.icon}
-                        </StyledToolTile>
-                    )
-                }
-            </StyledToolSection>
-            <StyledToolSection>
-            </StyledToolSection>
-        </StyledToolbar>
-    );
-};
+  return (
+    <StyledToolbar>
+      <StyledToolSection>
+        {
+          actionTypes.map((action) => (
+            <StyledToolTile>
+              {action.icon}
+            </StyledToolTile>
+          ))
+        }
+      </StyledToolSection>
+      <StyledToolSection>
+        {
+          tileTypes.map((tool, i) => (
+            <StyledToolTile
+              key={tool.value}
+              isActive={tool.value === state.activeTool}
+              onClick={() => selectTool(i)}
+            >
+              {tool.icon}
+            </StyledToolTile>
+          ))
+        }
+      </StyledToolSection>
+      <StyledToolSection />
+    </StyledToolbar>
+  );
+}

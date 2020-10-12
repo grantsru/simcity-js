@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
-import { Context } from "../store";
+import React, { useContext } from 'react';
+import { Context } from '../store';
 
-import Grid from "../components/Grid";
-import Toolbar from "./Toolbar";
+import Grid from '../components/Grid';
+import Toolbar from './Toolbar';
 
 export default function Board() {
   const [state] = useContext(Context);
@@ -13,5 +12,5 @@ export default function Board() {
       <Toolbar />
       <Grid gridMap={state.boardMap} />
     </>
-  )
+  );
 }

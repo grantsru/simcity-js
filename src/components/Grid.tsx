@@ -25,16 +25,14 @@ export default function Grid(props: GridProps) {
   return (
     <StyledGrid>
       {
-        gridMap.map((gridRow, i) =>
-          <StyledRow key={`row-${i}`}>
+        gridMap.map((gridRow) => (
+          <StyledRow key={`row-${Math.random().toString(5)}`}>
             {
-              gridRow.map((gridCell: Tile, j) =>
-                <Cell key={`cell-${j}`} tile={gridCell} />
-              )
+              gridRow.map((gridCell: Tile) => <Cell key={gridCell.type} tile={gridCell} />)
             }
           </StyledRow>
-        )
+        ))
       }
     </StyledGrid>
-  )
+  );
 }

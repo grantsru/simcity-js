@@ -1,12 +1,12 @@
 import { createContext } from 'react';
-import Tile, { tileTypes } from "../models/Tile";
+import Tile, { tileTypes } from '../models/Tile';
 
-const mapHeight = 41;
-const mapWidth = 41;
+const mapHeight = 15;
+const mapWidth = 21;
 
 const grassMap: Tile[][] = [...Array(mapHeight)]
-    .map((_, x) => [...Array(mapWidth)]
-        .map((_, y) => new Tile(tileTypes[0], x, y)));
+  .map((_, x) => [...Array(mapWidth)]
+    .map((_, y) => new Tile(tileTypes[0], x, y)));
 
 export const initialState = {
   boardMap: grassMap,
@@ -21,12 +21,14 @@ export const Reducer = (state, action) => {
     case HYDRATE:
       return {
         ...state,
-      }
+      };
     case SELECT_TOOL:
       return {
         ...state,
         activeTool: action.payload,
-      }
+      };
+    default:
+      throw new Error();
   }
 };
 
