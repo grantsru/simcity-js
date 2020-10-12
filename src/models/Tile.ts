@@ -12,24 +12,26 @@ export const tileTypes: TileType[] = [
     { value: 'industrial', icon: '🏭', cost: 50 },
     { value: 'commercial', icon: '🏢', cost: 50 },
     { value: 'reactor', icon: '☢️', cost: 50 },
-    { value: 'power', icon: '⚡', cost: 50 },
+    { value: 'power', icon: '🔌', cost: 50 },
 ];
 
 export default class Tile {
     x: number;
     y: number;
     type: TileType;
-    powered: boolean;
+    electricity = {
+        wired: false,
+        power: false,
+    }
 
     constructor(type, private readonly x, private readonly y) {
         this.type = type;
-        this.powered = false;
     }
 
     cellBackground(): string {
         switch (this.type.value) {
             case 'grass':
-                return 'yellowgreen';
+                return `yellowgreen`;
             case 'water':
                 return 'dodgerblue';
             case 'road':
@@ -45,6 +47,12 @@ export default class Tile {
             default:
                 return 'white';
         }
+    }
+
+    isBuilding() {
+        return this.type.value !== 'grass'
+            && this.type.value !== 'water'
+            && this.type.value !== 'reactor';
     }
 
     setTileType(value: string) {
